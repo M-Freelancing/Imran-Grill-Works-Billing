@@ -55,19 +55,21 @@
     <thead>
       <tr>
         <th>S.No</th>
-        <th>Total Payment</th>
+        <th>Total Items Payment</th>
         <th>Advance Payment</th>
+        <th>Pending Payment</th>
         <th>Transport Charge</th>
-        <th>Due Payment</th>
+        <th>Labour Charge</th>
+        <th>Final Payment</th>
       </tr>
     </thead>
     <tbody id="payment_data">
       <!--JavaScript -->
     </tbody>
   </table>
+  <h6 style="text-align: right; margin-right: 2%;" ><b id="final-total"></b></h6>
 
-
-  
+ 
 </div>
 <div id="elementH"></div>
 
@@ -99,12 +101,17 @@
             }
         }
         document.getElementById("grand-total").innerText = "Total: "+"Rs."+total_amount;
+
         customer_name = localStorage.getItem("customer_name")
         customer_place = localStorage.getItem("customer_place")
         var advance_payment = localStorage.getItem("advance_payment")
         advance_payment = advance_payment == null || advance_payment == 0 ? 0 : advance_payment;
+        var pending_payment = localStorage.getItem("pending_payment")
+        pending_payment = pending_payment == null || pending_payment == 0 ? 0 : pending_payment;
         var transport_charge = localStorage.getItem("transport_charge")
         transport_charge = transport_charge == null || transport_charge == 0 ? 0 : transport_charge;
+        var labour_charge = localStorage.getItem("labour_charge")
+        labour_charge = labour_charge == null || labour_charge == 0 ? 0 : labour_charge;
 
         var date = new Date()
         var day = date.getDate()
@@ -122,13 +129,18 @@
         day+' - '+month+' - '+date.getFullYear()+'</td><td>'+hours+':'+minutes+'</td>';
         document.getElementById('customer_data').appendChild(customer_data)
 
-        
+        var final_total = total_amount-parseInt(advance_payment)+parseInt(pending_payment)+parseInt(labour_charge)+parseInt(transport_charge)
         var payment_data = document.createElement("tr");
-        payment_data.innerHTML = '<td>'+1+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+
-        total_amount+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+advance_payment+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+
-        parseInt(transport_charge)+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+(total_amount-advance_payment+parseInt(transport_charge))+'</td>';
-        document.getElementById('payment_data').appendChild(payment_data)
 
+        payment_data.innerHTML = '<td>'+1+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+
+        total_amount+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+parseInt(advance_payment)+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+
+        pending_payment + '</td><td><span style="margin-right: 0.2em;">Rs.</span>' + parseInt(transport_charge) +
+        '</td><td><span style="margin-right: 0.2em;">Rs.</span>' +
+        parseInt(labour_charge)+'</td><td><span style="margin-right: 0.2em;">Rs.</span>'+
+        final_total+'</td>';
+
+        document.getElementById('payment_data').appendChild(payment_data)
+        document.getElementById("final-total").innerText = "Final Payment: "+"Rs."+final_total;
 
         localStorage.clear()
         
