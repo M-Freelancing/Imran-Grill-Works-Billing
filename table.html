@@ -14,10 +14,19 @@
 <body onload="load_data()" >
 
 <div class="container" id="contnet">
-<h2 style="text-align: right;margin-top: 5%;">Imran Grill Works</h2>
-<p style="text-align: right; ">Gurukul Road, Terdal- 587315</p>
-<p style="text-align: right;">+91 8151860841, +91 9110443068</p>
-  
+  <div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="./logo/RF-logos__black.png" width="300" height="300" />
+    </div>
+    <div class="col" >
+      <p style="text-align: right; margin-top: 40%;" >Gurukul Road, Terdal- 587315</p>
+      <p style="text-align: right; text-justify: center;">+91 8151860841, +91 9110443068</p>
+    </div>
+  </div>
+</div
+
+
 <h3>Customer Details</h3>
   <table class="table table-bordered">
     <thead>
@@ -69,14 +78,14 @@
   </table>
   <h6 style="text-align: right; margin-right: 2%;" ><b id="final-total"></b></h6>
 
- 
+
 </div>
 <div id="elementH"></div>
 
 <div class="container">
 
-<button type="submit" onclick="location.href='index.html';" class="btn btn-primary" id="submit">Home</button> 
-<button  class="btn btn-primary" onclick="generatePDF()">Download</button> 
+<button type="submit" onclick="location.href='index.html';" class="btn btn-primary" id="submit">Home</button>
+<button  class="btn btn-primary" onclick="generatePDF()">Download</button>
 
 </div>
 <script>
@@ -143,7 +152,7 @@
         document.getElementById("final-total").innerText = "Final Payment: "+"Rs."+final_total;
 
         localStorage.clear()
-        
+
     }
 
     function generatePDF() {
